@@ -2,8 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "listaendereco.h"
+#include "listaEndereco.h"
 #include "listaQuadras.h"
+#include "lista.h"
 
 typedef struct endereco{
     char cpf[25];

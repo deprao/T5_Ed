@@ -1,6 +1,8 @@
 #ifndef _HASHTABLE_H
 #define _HASHTABLE_H
 
+#include "lista.h"
+
 typedef void *hstable;
 typedef void *elementoHstable;
 

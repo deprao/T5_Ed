@@ -75,17 +75,17 @@ void tratamentoString(char *diretorio, char *arquivoGeo, char *arquivoQry, char 
             }
 
             if(arquivoEc != NULL){
-                hstable hashtableEstabelecimentos[1];
+                hstable hashtableEstabelecimentos[2];
                 hashtableEstabelecimentos[0] = iniciaHashtable();
                 hashtableEstabelecimentos[1] = iniciaHashtable();
                 openEc(arquivoEc, hashtableEstabelecimentos[1]);
             }
-            if(arquivoPm != NULL){
+            /*if(arquivoPm != NULL){
                 hstable hashtablePessoas[1];
                 hashtablePessoas[0] = iniciaHashtable();
                 hashtablePessoas[1] = iniciaHashtable();
                 openPm(arquivoPm, hashtablePessoas[1]);
-            }
+            }*/
             
 
                 saidaSvg =  (char*)malloc( ( (strlen(pastaSaida)+strlen(nomeArquivoGeo) )+8 )* sizeof(char) );

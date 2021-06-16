@@ -365,13 +365,13 @@ void openEc(char *arquivoEc, hstable hashEc[]){
          if(strcmp(comando, "t") == 0){
             fscanf(entrada ,"%s %s", codt, descricao);
             elemento = criaDescricao(descricao, codt);
-            insereHashtable(hashEc[0], codt, elemento);
-            printf("foi");
+            insereHashtable(hashEc[0], descricao, elemento);
+            printf("\nfoi");
          }
          else if(strcmp(comando, "e") == 0){
             fscanf(entrada ,"%s %s %s %s %s %lf %s", cnpj, cpf, codt, cep, face, &num, nome);
             elemento = criaDescricao(descricao, codt);
-            insereHashtable(hashEc[1], cnpj, elemento);
+            //insereHashtable(hashEc[1], cnpj, elemento);
          }
     }
     fclose(entrada);
