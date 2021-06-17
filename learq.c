@@ -348,7 +348,7 @@ void openEc(char *arquivoEc, hstable hashEc[]){
     char cnpj[25];
     char cpf[20];
     char cep[20];
-    char face[2];
+    char face;
     double num;
     char nome[300];
     tipo elemento;
@@ -366,14 +366,17 @@ void openEc(char *arquivoEc, hstable hashEc[]){
             fscanf(entrada ,"%s %s", codt, descricao);
             elemento = criaDescricao(descricao, codt);
             insereHashtable(hashEc[0], descricao, elemento);
-            printf("\nfoi");
+
          }
          else if(strcmp(comando, "e") == 0){
-            fscanf(entrada ,"%s %s %s %s %s %lf %s", cnpj, cpf, codt, cep, face, &num, nome);
-            elemento = criaDescricao(descricao, codt);
-            //insereHashtable(hashEc[1], cnpj, elemento);
+            fscanf(entrada ,"%s %s %s %s %c %lf %s", cnpj, cpf, codt, cep, &face, &num, nome);
+            elemento = criaEstabelecimento(cnpj, cpf, codt, cep, face, num, nome);
+            insereHashtable(hashEc[1], cnpj, elemento);
          }
     }
+
+    //imprimeHashtable(hashEc[0], 'a');
+    imprimeHashtable(hashEc[1], 'e');
     fclose(entrada);
 }
 

@@ -7,6 +7,7 @@
 #include "listaQuadras.h"
 #include "quadtree.h"
 #include "listaPontos.h"
+#include "listaEstabelecimentos.h"
 
 typedef struct ponto{
     double x;
@@ -298,6 +299,12 @@ void imprimeLista(listaStruct l, char c){
             }
             else if(c == 'p'){
                 printf("%lf, %lf\n", getXPonto(getElemento(node)),getYPonto(getElemento(node)));
+            }
+            else if(c == 'e'){
+                printf("%s, %s, %s, %s, %c, %d, %s\n", getCnpjEstabelecimento(getElemento(node)), getCpfEstabelecimento(getElemento(node)), getCodtEstabelecimento(getElemento(node)), getCepEstabelecimento(getElemento(node)), getFaceEstabelecimento(getElemento(node)), getNumEstabelecimento(getElemento(node)), getNomeEstabelecimento(getElemento(node)));
+            }
+            else if(c == 'a'){
+                printf("%s, %s\n", getDescEstabelecimento(getElemento(node)), getCodtDescEstabelecimento(getElemento(node)));
             }
             node = node->prox;
         }

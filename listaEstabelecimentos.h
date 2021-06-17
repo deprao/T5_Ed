@@ -23,6 +23,10 @@ int getNumEstabelecimento(listaEstabelecimento lista);
 
 char *getNomeEstabelecimento(listaEstabelecimento lista);
 
+char *getCodtDescEstabelecimento(listaDescricaoEstabelecimento lista);
+
+char *getDescEstabelecimento(listaDescricaoEstabelecimento lista);
+
 void setCnpjEstabelecimento(listaEstabelecimento lista, char *cnpj);
 
 void setCpfEstabelecimento(listaEstabelecimento lista, char *cpf);
@@ -36,5 +40,9 @@ void setFaceEstabelecimento(listaEstabelecimento lista, char face);
 void setNumEstabelecimento(listaEstabelecimento lista, char num);
 
 void setNomeEstabelecimento(listaEstabelecimento lista, char *nome);
+
+void setCodtDescEstabelecimento(listaDescricaoEstabelecimento lista, char codt);
+
+void setDescEstabelecimento(listaDescricaoEstabelecimento lista, char *descricao);
 
 #endif

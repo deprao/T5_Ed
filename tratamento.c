@@ -78,7 +78,7 @@ void tratamentoString(char *diretorio, char *arquivoGeo, char *arquivoQry, char 
                 hstable hashtableEstabelecimentos[2];
                 hashtableEstabelecimentos[0] = iniciaHashtable();
                 hashtableEstabelecimentos[1] = iniciaHashtable();
-                openEc(arquivoEc, hashtableEstabelecimentos[1]);
+                openEc(arquivoEc, hashtableEstabelecimentos);
             }
             /*if(arquivoPm != NULL){
                 hstable hashtablePessoas[1];

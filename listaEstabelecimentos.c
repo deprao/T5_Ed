@@ -73,6 +73,16 @@ char *getNomeEstabelecimento(listaEstabelecimento lista){
     return e->nome;
 }
 
+char *getCodtDescEstabelecimento(listaDescricaoEstabelecimento lista){
+    descricaoEstabelecimento *de = (descricaoEstabelecimento*)lista;
+    return de->codt;
+}
+
+char *getDescEstabelecimento(listaDescricaoEstabelecimento lista){
+    descricaoEstabelecimento *de = (descricaoEstabelecimento*)lista;
+    return de->descricao;
+}
+
 void setCnpjEstabelecimento(listaEstabelecimento lista, char *cnpj){
     Estabelecimento *e = (Estabelecimento*)lista;
     strcpy(e->cnpj, cnpj);
@@ -108,3 +118,12 @@ void setNomeEstabelecimento(listaEstabelecimento lista, char *nome){
     strcpy(e->nome, nome);
 }
 
+void setCodtDescEstabelecimento(listaDescricaoEstabelecimento lista, char codt){
+    descricaoEstabelecimento *de = (descricaoEstabelecimento*)lista;
+     strcpy(de->codt, codt);
+}
+
+void setDescEstabelecimento(listaDescricaoEstabelecimento lista, char *descricao){
+    descricaoEstabelecimento *de = (descricaoEstabelecimento*)lista;
+    strcpy(de->descricao, descricao);
+}
