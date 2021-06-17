@@ -16,6 +16,8 @@ int removeHashtable(hstable hash, char *string, int (*op));
 
 listaStruct getListaHashtable(hstable lista);
 
+void liberaHashtable(hstable hash);
+
 void imprimeHashtable(hstable hash, char op);
 
 #endif

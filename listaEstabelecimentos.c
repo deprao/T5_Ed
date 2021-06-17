@@ -118,7 +118,7 @@ void setNomeEstabelecimento(listaEstabelecimento lista, char *nome){
     strcpy(e->nome, nome);
 }
 
-void setCodtDescEstabelecimento(listaDescricaoEstabelecimento lista, char codt){
+void setCodtDescEstabelecimento(listaDescricaoEstabelecimento lista, char *codt){
     descricaoEstabelecimento *de = (descricaoEstabelecimento*)lista;
      strcpy(de->codt, codt);
 }

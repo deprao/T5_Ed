@@ -8,6 +8,8 @@
 #include "quadtree.h"
 #include "listaPontos.h"
 #include "listaEstabelecimentos.h"
+#include "listaPessoas.h"
+#include "listaEndereco.h"
 
 typedef struct ponto{
     double x;
@@ -305,6 +307,12 @@ void imprimeLista(listaStruct l, char c){
             }
             else if(c == 'a'){
                 printf("%s, %s\n", getDescEstabelecimento(getElemento(node)), getCodtDescEstabelecimento(getElemento(node)));
+            }
+            else if(c == 'd'){
+                printf("%s, %s, %s, %c, %s\n", getCpfPessoa(getElemento(node)), getNomePessoa(getElemento(node)), getSobrenomePessoa(getElemento(node)), getSexoPessoa(getElemento(node)), getNascPessoa(getElemento(node)));
+            }
+            else if(c == 'f'){
+                printf("%s, %s, %s, %c, %d\n", getCpfEndereco(getElemento(node)), getComplementoEndereco(getElemento(node)), getCepEndereco(getElemento(node)), getFaceEndereco(getElemento(node)), getNumEndereco(getElemento(node)));
             }
             node = node->prox;
         }

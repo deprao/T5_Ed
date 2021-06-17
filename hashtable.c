@@ -4,7 +4,7 @@
 #include "hashtable.h"
 #include "lista.h"
 
-#define TAMANHO 301
+#define TAMANHO 1001
 
 typedef struct nodehash{
     listaStruct nodeHstable;
@@ -22,7 +22,6 @@ int getKey(char *string){
 }
 
 hstable iniciaHashtable(){
-    int i = 0;
     NodeHashtable *hash = (NodeHashtable*)malloc(sizeof(NodeHashtable) * TAMANHO);
     for(int i = 0; i < TAMANHO; i++){
         hash[i].key = i + 1;
@@ -32,20 +31,19 @@ hstable iniciaHashtable(){
 }
 
 void insereHashtable(hstable hash, char *elementoKey, Node *elemento){
-    NodeHashtable *arrayHash = (NodeHashtable*)hash; /*aqui especifica qual hashtable estou trabalhando com*/
+    NodeHashtable *hashArray = (NodeHashtable*)hash; /*aqui especifica qual hashtable estou trabalhando com*/
     int posHash = getKey(elementoKey);
-    arrayHash[posHash].nodeHstable = insertElemento(arrayHash[posHash].nodeHstable, elemento);
+    hashArray[posHash].nodeHstable = insertElemento(hashArray[posHash].nodeHstable, elemento);
 }
 
 int removeHashtable(hstable hash, char *string, int (*op)){
     int posHash = getKey(string);
-    NodeHashtable *arrayHash = (NodeHashtable*)hash;
-    Node elementoLista = arrayHash[posHash].nodeHstable;
+    NodeHashtable *hashArray = (NodeHashtable*)hash;
+    Node elementoLista = hashArray[posHash].nodeHstable;
 
     if(elementoLista == NULL){
         return;
     }
-
 }
 
 listaStruct getListaHashtable(hstable lista){
@@ -88,6 +86,15 @@ void percorreComparaHashtable(hstable hash, char *string, void (*op)(), int (*co
     }
 }
 
+void liberaHashtable(hstable hash){
+    NodeHashtable *hashArray = (NodeHashtable*)hash;
+
+    for(int i = 0; i < TAMANHO; i++){
+        liberaLista(hashArray[i].nodeHstable);
+    }
+    free(hashArray);
+}
+
 void imprimeHashtable(hstable hash, char op){
     NodeHashtable *hashArray = (NodeHashtable*)hash;
 
@@ -99,12 +106,20 @@ void imprimeHashtable(hstable hash, char op){
         void *no = hashArray[i].nodeHstable;
             if (getFirst(no) != NULL){
                 switch(op){
-                    case 'a':
+                    case 'a':/*Lista de Descricao*/
                     imprimeLista(no, 'a');
                     break;
 
                     case 'e':
-                    imprimeLista(no, 'e');
+                    imprimeLista(no, 'e');/*Lista de Estabelecimentos*/
+                    break;
+
+                    case 'd':/*Lista de Pessoas*/
+                    imprimeLista(no, 'd');
+                    break;
+
+                    case 'f':
+                    imprimeLista(no, 'f');/*Lista de Enderecos*/
                     break;
                 }
             }

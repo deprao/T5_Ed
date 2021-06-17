@@ -376,22 +376,23 @@ void openEc(char *arquivoEc, hstable hashEc[]){
     }
 
     //imprimeHashtable(hashEc[0], 'a');
-    imprimeHashtable(hashEc[1], 'e');
+    //imprimeHashtable(hashEc[1], 'e');
     fclose(entrada);
 }
 
-void openPm(char *arquivoPm, hstable hashPm){
+void openPm(char *arquivoPm, hstable hashPm[], listaStruct listacidade){
     FILE *entrada;
     char comando[5];
     char cpf[20];
     char nome[150];
     char sobrenome[150];
-    char sexo[2];
+    char sexo;
     char nasc[15];
-    char face[2];
+    char face;
     double num;
     char comp[25];
     char cep[20];
+    tipo elemento;
 
     entrada = fopen(arquivoPm, "r");
 
@@ -403,10 +404,21 @@ void openPm(char *arquivoPm, hstable hashPm){
 
     while(fscanf(entrada, "%s", comando) != EOF){
         if(strcmp(comando, "p") == 0){
-             fscanf(entrada ,"%s %s %s %s %s", cpf, nome, sobrenome, sexo, nasc);
+            fscanf(entrada ,"%s %s %s %c %s", cpf, nome, sobrenome, &sexo, nasc);
+            elemento = criaPessoa(cpf, nome, sobrenome, sexo, nasc);
+            insereHashtable(hashPm[0], cpf, elemento);
         }
         else if(strcmp(comando, "m") == 0){
-             fscanf(entrada ,"%s %s %s %lf %s", cpf, cep, face, &num ,comp);
+             fscanf(entrada ,"%s %s %c %lf %s", cpf, cep, &face, &num ,comp);
+             Node quadra = comparaCepQuadra(listacidade, cep);
+             if(quadra == NULL){
+                 return;
+             }
+            elemento = criaEndereco(cpf, comp, face, num, quadra);
+            insereHashtable(hashPm[1], cpf, elemento);
         }
     }
+
+    //imprimeHashtable(hashPm[0], 'd');
+    //imprimeHashtable(hashPm[1], 'f');
 }

@@ -18,6 +18,6 @@ void openEc(char *arquivoEc, hstable listaEc[]);
 
 /*Abre o arquivo pm, realiza as alteracoes necessarias e cria a hash 
 table de pessoas e moradores*/
-void openPm(char *arquivoPm, hstable listaPm[]);
+void openPm(char *arquivoPm, hstable listaPm[], listaStruct listacidade);
 
 #endif

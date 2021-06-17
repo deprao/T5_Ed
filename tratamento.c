@@ -73,19 +73,6 @@ void tratamentoString(char *diretorio, char *arquivoGeo, char *arquivoQry, char 
                         strcpy(caminhoEc, arquivoPm);
                     }
             }
-
-            if(arquivoEc != NULL){
-                hstable hashtableEstabelecimentos[2];
-                hashtableEstabelecimentos[0] = iniciaHashtable();
-                hashtableEstabelecimentos[1] = iniciaHashtable();
-                openEc(arquivoEc, hashtableEstabelecimentos);
-            }
-            /*if(arquivoPm != NULL){
-                hstable hashtablePessoas[1];
-                hashtablePessoas[0] = iniciaHashtable();
-                hashtablePessoas[1] = iniciaHashtable();
-                openPm(arquivoPm, hashtablePessoas[1]);
-            }*/
             
 
                 saidaSvg =  (char*)malloc( ( (strlen(pastaSaida)+strlen(nomeArquivoGeo) )+8 )* sizeof(char) );
@@ -95,6 +82,20 @@ void tratamentoString(char *diretorio, char *arquivoGeo, char *arquivoQry, char 
                 printf("\n\nsaida caminhoPm: %s", caminhoPm);*/
 
                 openGeo(Cidade, CidadeQt, caminhoGeo, saidaSvg);
+
+                hstable hashtableEstabelecimentos[2];
+                hstable hashtablePessoas[2];
+
+                if(arquivoEc != NULL){
+                    hashtableEstabelecimentos[0] = iniciaHashtable();
+                    hashtableEstabelecimentos[1] = iniciaHashtable();
+                    openEc(arquivoEc, hashtableEstabelecimentos);
+                }
+                if(arquivoPm != NULL){
+                    hashtablePessoas[0] = iniciaHashtable();
+                    hashtablePessoas[1] = iniciaHashtable();
+                    openPm(arquivoPm, hashtablePessoas, Cidade);
+                }
 
                 liberaLista(getListaFormas(Cidade));
                 liberaLista(getListaObjetos(Cidade));
@@ -126,7 +127,12 @@ void tratamentoString(char *diretorio, char *arquivoGeo, char *arquivoQry, char 
     liberaQuadTree(getQuadtreeRegioes(CidadeQt));
     liberaQuadTree(getQuadtreeCasosCovid(CidadeQt));
     free(CidadeQt);*/
-    
+
+    liberaHashtable(hashtableEstabelecimentos[0]);
+    liberaHashtable(hashtableEstabelecimentos[1]);     
+    liberaHashtable(hashtablePessoas[0]);
+    liberaHashtable(hashtablePessoas[1]);   
+
     free(caminhoEc);
     free(caminhoPm);
     free(saidaSvg);

@@ -41,7 +41,7 @@ void setNumEstabelecimento(listaEstabelecimento lista, char num);
 
 void setNomeEstabelecimento(listaEstabelecimento lista, char *nome);
 
-void setCodtDescEstabelecimento(listaDescricaoEstabelecimento lista, char codt);
+void setCodtDescEstabelecimento(listaDescricaoEstabelecimento lista, char *codt);
 
 void setDescEstabelecimento(listaDescricaoEstabelecimento lista, char *descricao);
 
