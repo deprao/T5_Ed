@@ -97,14 +97,6 @@ void tratamentoString(char *diretorio, char *arquivoGeo, char *arquivoQry, char 
                     openPm(arquivoPm, hashtablePessoas, Cidade);
                 }
 
-                liberaLista(getListaFormas(Cidade));
-                liberaLista(getListaObjetos(Cidade));
-                liberaLista(getListaQuadras(Cidade));
-                liberaLista(getListaPostos(Cidade));
-                liberaLista(getListaRegioes(Cidade));
-                liberaLista(getListaCasosCovid(Cidade));
-                free(Cidade);
-
             if (arquivoQry != NULL){
                     nomeArquivoQry = (char*)malloc( ( ( strlen(arquivoQry) )+8 )*sizeof(char) );
 
@@ -115,10 +107,18 @@ void tratamentoString(char *diretorio, char *arquivoGeo, char *arquivoQry, char 
                     saidaQry =  (char*)malloc( ( (strlen(pastaSaida)+strlen(nomeArquivoGeo)+strlen(nomeArquivoQry) )+16 )* sizeof(char) );
                     sprintf(saidaQry, "%s/%s-%s", pastaSaida, nomeArquivoGeo, nomeArquivoQry);
                     /*printf("\n\nsaida Qry: %s", saidaQry);*/
-                    //openQry(Cidade, caminhoQry, saidaQry);
+                    openQry(Cidade, caminhoQry, saidaQry, CidadeQt);
                 free(saidaQry);
                 free(nomeArquivoQry);
             }
+
+        liberaLista(getListaFormas(Cidade));
+        liberaLista(getListaObjetos(Cidade));
+        liberaLista(getListaQuadras(Cidade));
+        liberaLista(getListaPostos(Cidade));
+        liberaLista(getListaRegioes(Cidade));
+        liberaLista(getListaCasosCovid(Cidade));
+        free(Cidade);
 
     /*liberaQuadTree(getQuadtreeFormas(CidadeQt));
     liberaQuadTree(getQuadtreeObjetos(CidadeQt));

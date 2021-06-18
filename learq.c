@@ -178,7 +178,7 @@ void openGeo(listaCidade listacidade, QuadTree qt, char *nomeGeo, char *saidaSvg
 
 }
 
-void openQry(listaCidade listacidade, char *entradaQry, char *saidaQry){
+void openQry(listaCidade listacidade, char *entradaQry, char *saidaQry, QuadTree qt){
   FILE *entrada, *saidaTxt;
 
     char comando[12];
@@ -197,6 +197,18 @@ void openQry(listaCidade listacidade, char *entradaQry, char *saidaQry){
     int num;
     int n_casos;
     int n_postos;
+    char cpf[25];
+    char cep[25];
+    char cnpj[25];
+    char complemento[25];
+    char t;
+    char sufixo[30];
+    char tipoEstabelecimento[20];
+    char registrador[4];
+    char registrador2[4];
+    char cmc[20];
+    char cmr[20];
+    int maxCovid;
 
     char *saidaSvgQry = malloc(strlen(saidaQry)+5);
     char *saidaTxtQry = malloc(strlen(saidaQry)+5);
@@ -314,26 +326,69 @@ void openQry(listaCidade listacidade, char *entradaQry, char *saidaQry){
             else if(strcmp(comando, "ci") == 0){
                 fscanf(entrada, "%lf %lf %lf", &x, &y, &r);
             }
+
             else if(strcmp(comando, "m?") == 0){
-
+                fscanf(entrada, "%s", cep);
             }
+
             else if(strcmp(comando, "dm?") == 0){
-
+                fscanf(entrada, "%s", cpf);
             }
+
             else if(strcmp(comando, "de?") == 0){
-
+                fscanf(entrada, "%s", cnpj);
             }
+
             else if(strcmp(comando, "mud") == 0){
-
+                fscanf(entrada, "%s %s %c %d %s", cpf, cep, &face, &num, complemento);
             }
+
             else if(strcmp(comando, "dmprbt") == 0){
-
+                fscanf(entrada, "%c %s", &t, sufixo);
             }
+
             else if(strcmp(comando, "eplg?") == 0){
-
+                fscanf(entrada, "%s %lf %lf %lf %lf", tipoEstabelecimento, &x, &y, &w, &h);
             }
-            else if(strcmp(comando, "catac") == 0){
 
+            else if(strcmp(comando, "catac") == 0){
+                fscanf(entrada, "%lf %lf %lf", &x, &y, &r);
+            }
+
+            else if(strcmp(comando, "@m?") == 0){
+                fscanf(entrada, "%s %s", registrador, cpf);
+            }
+
+            else if(strcmp(comando, "@e?") == 0){
+                fscanf(entrada, "%s %s %c %d", registrador, cpf, &face, &num);
+            }
+
+            else if(strcmp(comando, "@g?") == 0){
+                fscanf(entrada, "%s %s", registrador, id);
+            }
+
+            else if(strcmp(comando, "@xy?") == 0){
+                fscanf(entrada, "%s %lf %lf", registrador, &x, &y);
+            }
+
+            else if(strcmp(comando, "ccv") == 0){  
+                 fscanf(entrada, "%s", sufixo);
+            }
+
+            else if(strcmp(comando, "p?") == 0){
+                fscanf(entrada, "%s %s %s %s %s", sufixo, registrador, registrador2, cmc, cmr);
+            }
+
+            else if(strcmp(comando, "bf") == 0){
+                fscanf(entrada, "%d", &maxCovid);
+            }
+
+            else if(strcmp(comando, "sp?") == 0){
+                fscanf(entrada, "%s %s %s %s %s", sufixo, registrador, registrador2, cmc, cmr);
+            }
+            
+            else if(strcmp(comando, "pb?") == 0){
+                fscanf(entrada, "%s %s %s %s", sufixo, registrador, registrador2, cmc);
             }
         }
         
@@ -425,4 +480,6 @@ void openPm(char *arquivoPm, hstable hashPm[], listaStruct listacidade){
 
     //imprimeHashtable(hashPm[0], 'd');
     //imprimeHashtable(hashPm[1], 'f');
+
+    fclose(entrada);
 }

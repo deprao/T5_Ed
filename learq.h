@@ -10,7 +10,7 @@
 void openGeo(listaCidade listacidade, QuadTree qt, char *nomeGeo, char *saidaSvg);
 
 /*Abre o arquivo qry, realiza as alterações necessárias na lista e gera o svg de .qry*/
-void openQry(listaCidade listacidade, char *entradaQry, char *saidaQry);
+void openQry(listaCidade listacidade, char *entradaQry, char *saidaQry, QuadTree qt);
 
 /*Abre o arquivo ec, realiza as alteracoes necessarias e cria a hash table
 de estabelecimentos*/

@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include "hashtable.h"
 #include "lista.h"
+#include "quadtree.h"
 
 #define TAMANHO 1001
 
@@ -124,4 +125,15 @@ void imprimeHashtable(hstable hash, char op){
                 }
             }
     }
+}
+
+Node comparaHashtableM(hstable hash, char *key, char op, QuadTree qt){
+    NodeHashtable *hashArray = (NodeHashtable*)hash;
+
+    if(hashArray == NULL){
+        return;
+    }
+
+    int posHash = getKey(key);
+    
 }
