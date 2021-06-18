@@ -13,6 +13,8 @@ typedef struct quadra{
     char corb[20]; /*cor borda*/
     char corp[20]; /*cor preenchimento*/
     char char_id; /*identificador de tipo*/
+    int shadowFilter; /*indicador de shadowfilter*/
+    int corShadowFilter; /*indica a cor de shadowfilter*/
 }Quadra;
 
 listaQuadra criaQuadra(char *cep, double x, double y, double w, double h, char *corb, char *corp, char *sw){
@@ -26,6 +28,8 @@ listaQuadra criaQuadra(char *cep, double x, double y, double w, double h, char *
     strcpy(q->corp, corp);
     strcpy(q->sw, sw);
     q->char_id = 'q';
+    q->shadowFilter = 0; /*Seta o default da criacao de quadra com shadowfilter = 0;*/
+    q->corShadowFilter = 0;
     return q;
 }
 
@@ -69,8 +73,27 @@ char *getSwQuadra(listaQuadra lista){
     return q->sw;
 }
 
+int getShadowFilterQuadra(listaQuadra lista){
+    Quadra *q = (Quadra*)lista;
+    return q->shadowFilter;
+}
+
+int getCorShadowFilterQuadra(listaQuadra lista){
+    Quadra *q = (Quadra*)lista;
+    return q->corShadowFilter;
+}
+
 void setCorbQuadra(listaQuadra lista, char *Cstroke){
     Quadra *q = (Quadra*)lista;
     strcpy(q->corb, Cstroke);
 }
 
+void setFilterQuadra(listaQuadra lista, int filter){
+    Quadra *q = (Quadra*)lista;
+    q->shadowFilter = filter;
+}
+
+void setCorFilterQuadra(listaQuadra lista, int filter){
+    Quadra *q = (Quadra*)lista;
+    q->corShadowFilter = filter;
+}

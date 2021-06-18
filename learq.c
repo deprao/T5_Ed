@@ -19,6 +19,7 @@
 #include "listaEstabelecimentos.h"
 #include "listaPessoas.h"
 #include "listaEndereco.h"
+#include "opgeo.h"
 
 void openGeo(listaCidade listacidade, QuadTree qt, char *nomeGeo, char *saidaSvg){
     char comando[4];
@@ -51,7 +52,7 @@ void openGeo(listaCidade listacidade, QuadTree qt, char *nomeGeo, char *saidaSvg
     double y;
     double w;
     double h;
-    double d;
+    double densidade;
     char sw[8];
     char cw[8];
     char rw[8];
@@ -134,10 +135,9 @@ void openGeo(listaCidade listacidade, QuadTree qt, char *nomeGeo, char *saidaSvg
                     insertElemento(getListaPostos(listacidade), elemento); 
                 }
 
-                else if((strcmp(comando, "d") == 0)){
-                    fscanf(arq, "%lf, %lf, %lf, %lf, %lf", &x, &y, &w, &h, &d);
-                    totalR = totalR + 1;
-                    elemento = criaRegiao(totalR, x, y, w, h, d);
+                else if((strcmp(comando, "dd") == 0)){
+                    fscanf(arq, "%lf %lf %lf %lf %lf", &x, &y, &w, &h, &densidade);
+                    elemento = criaRegiao(x, y, w, h, densidade);
                     insertElemento(getListaRegioes(listacidade), elemento);
                 }
 
@@ -161,6 +161,10 @@ void openGeo(listaCidade listacidade, QuadTree qt, char *nomeGeo, char *saidaSvg
                     fscanf(arq, "%s %s", cw, rw);
                 }
             }
+
+    if (getFirst(getListaRegioes(listacidade)) != NULL){    
+        densidadeDemografica(listacidade);
+    }
 
     svgen(listacidade, saidaSvg);
 

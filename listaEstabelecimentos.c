@@ -11,7 +11,7 @@ typedef struct estabelecimento{
     char cep[25];
     char face;
     int num;
-    char nome[35];
+    char nome[40];
 }Estabelecimento;
 
 typedef struct descricaoestabelecimento{

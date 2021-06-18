@@ -30,6 +30,11 @@ void desenhaQuadra(FILE *saida, double x, double y, double w, double h, char *cf
     , x, y, w, h, cfill, cstrk, sw );
 }
 
+void desenhaQuadraSombra(FILE *saida, double x, double y, double w, double h, char *cfill, char *cstrk, char *sw, char *filterSombra){
+    fprintf(saida, "<rect x=\"%lf\" y=\"%lf\" width=\"%lf\" height=\"%lf\" fill=\"%s\" stroke=\"%s\" stroke-width=\"%s\" filter=\"url(%s)\"/>\n"
+    , x, y, w, h, cfill, cstrk, sw, filterSombra );
+}
+
 void desenhaHidrante(FILE *saida, double x, double y, char *cfill, char *cstrk, char *sw){
     double r;
     r = 6;
@@ -114,11 +119,67 @@ void svgen(listaCidade listacidade,char *out){
         exit(1);
     }
 
-    fprintf(svg,"<svg>\n");
+    fprintf(svg,"<svg xmlns=\"http://www.w3.org/2000/svg\">\n");
+    fprintf(svg, "<defs>\n");
+   
+    fprintf(svg, "<filter id=\"shadow1\">\n");
+    fprintf(svg, "<feDropShadow dx=\"4\" dy=\"4\" stdDeviation=\"0.5\" flood-color=\"#FFFF00\" />\n");
+    fprintf(svg, "</filter>\n");
+
+
+    fprintf(svg, "<filter id=\"shadow2\">\n");
+    fprintf(svg, "<feDropShadow dx=\"4\" dy=\"4\" stdDeviation=\"0.5\" flood-color=\"#FF9955\" />\n");
+    fprintf(svg, "</filter>\n");
+
+
+    fprintf(svg, "<filter id=\"shadow3\">\n");
+    fprintf(svg, "<feDropShadow dx=\"4\" dy=\"4\" stdDeviation=\"0.5\" flood-color=\"#FF0000\" />\n");
+    fprintf(svg, "</filter>\n");
+
+
+    fprintf(svg, "<filter id=\"shadow4\">\n");
+    fprintf(svg, "<feDropShadow dx=\"4\" dy=\"4\" stdDeviation=\"0.5\" flood-color=\"#FF00CC\"  />\n");
+    fprintf(svg, "</filter>\n");
+
+
+    fprintf(svg, "<filter id=\"shadow5\">\n");
+    fprintf(svg, "<feDropShadow dx=\"4\" dy=\"4\" stdDeviation=\"0.5\" flood-color=\"#6600FF\" />\n");
+    fprintf(svg, "</filter>\n");
+
+
+    fprintf(svg, "<filter id=\"shadow6\">\n");
+    fprintf(svg, "<feDropShadow dx=\"4\" dy=\"4\" stdDeviation=\"0.5\" flood-color=\"#A02C5A\" />\n");
+    fprintf(svg, "</filter>\n");
+
+    fprintf(svg, "</defs>\n");
 
     while(Q!=NULL){
         q = getElemento(Q);
-        desenhaQuadra(svg,getXQuadra(q),getYQuadra(q),getWQuadra(q),getHQuadra(q),getCorpQuadra(q),getCorbQuadra(q),getSwQuadra(q));
+        int testeQ = getShadowFilterQuadra(q);
+            if(testeQ == 0){
+                desenhaQuadra(svg,getXQuadra(q),getYQuadra(q),getWQuadra(q),getHQuadra(q),getCorpQuadra(q),getCorbQuadra(q),getSwQuadra(q));
+            }
+            else if(testeQ == 1){
+                int testeCQ = getCorShadowFilterQuadra(q);
+                    if(testeCQ == 1){
+                        desenhaQuadraSombra(svg,getXQuadra(q),getYQuadra(q),getWQuadra(q),getHQuadra(q),getCorpQuadra(q),getCorbQuadra(q),getSwQuadra(q), "#shadow1");
+                    }
+                    else if(testeCQ == 2){
+                        desenhaQuadraSombra(svg,getXQuadra(q),getYQuadra(q),getWQuadra(q),getHQuadra(q),getCorpQuadra(q),getCorbQuadra(q),getSwQuadra(q), "#shadow2");
+                    }
+                    else if(testeCQ == 3){
+                        desenhaQuadraSombra(svg,getXQuadra(q),getYQuadra(q),getWQuadra(q),getHQuadra(q),getCorpQuadra(q),getCorbQuadra(q),getSwQuadra(q), "#shadow3");
+                    }
+                    else if(testeCQ == 4){
+                        desenhaQuadraSombra(svg,getXQuadra(q),getYQuadra(q),getWQuadra(q),getHQuadra(q),getCorpQuadra(q),getCorbQuadra(q),getSwQuadra(q), "#shadow4");
+                    }
+                    else if(testeCQ == 5){
+                        desenhaQuadraSombra(svg,getXQuadra(q),getYQuadra(q),getWQuadra(q),getHQuadra(q),getCorpQuadra(q),getCorbQuadra(q),getSwQuadra(q), "#shadow5");
+                    }
+                    else if(testeCQ == 6){
+                        desenhaQuadraSombra(svg,getXQuadra(q),getYQuadra(q),getWQuadra(q),getHQuadra(q),getCorpQuadra(q),getCorbQuadra(q),getSwQuadra(q), "#shadow6");
+                    }               
+            }
         Q = getNext(Q);
     }
     while(O!=NULL){

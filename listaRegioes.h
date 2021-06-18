@@ -5,10 +5,7 @@
 typedef void *listaRegiao;
 
 /*Cria o elemento Regiao e retorna o ponteiro desse elemento*/
-listaRegiao criaRegiao(int id, double x, double y, double w, double h, double d);
-
-/*Retorna int do elemento pertencente a lista de Regiao*/
-int getIdRegiao(listaRegiao lista);
+listaRegiao criaRegiao(double x, double y, double w, double h, double d);
 
 /*Retorna X do elemento pertencente a lista de Regiao*/
 double getXRegiao(listaRegiao lista);
