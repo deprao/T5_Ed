@@ -52,5 +52,5 @@ listaCidadeQT getQuadtreeCasosCovid(listaCidadeQT qt){
 
 listaCidadeQT getQuadtreeQuadras(listaCidadeQT qt){
     ListaQtStruct* list = (ListaQtStruct*)qt;
-    return list->QtCovid;
+    return list->QtQuadras;
 }

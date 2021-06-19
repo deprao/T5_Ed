@@ -11,16 +11,15 @@
 #include "listaCasosCovid.h"
 
 void desenhaSemaforo(FILE *saida, double x, double y, char *cfill, char *cstrk, char *sw){
-    double w, h;
-    w =  8;
-    h =  20;
-    fprintf(saida, "<rect x=\"%lf\" y=\"%lf\" width=\"%lf\" height=\"%lf\" fill=\"%s\" stroke=\"%s\" stroke-width=\"%s\" />\n"
-    , x, y, w, h, cfill, cstrk, sw );
+    double r;
+    r = 4;
+    fprintf(saida, "<circle cx=\"%lf\" cy=\"%lf\" r=\"%lf\" fill=\"%s\" stroke=\"%s\" stroke-width=\"%s\" />\n", 
+    x, y, r, cfill, cstrk, sw);
 }
 
 void desenhaRadio(FILE *saida, double x, double y, char *cfill, char *cstrk, char *sw){
     double r;
-    r = 6;
+    r = 4;
     fprintf(saida, "<circle cx=\"%lf\" cy=\"%lf\" r=\"%lf\" fill=\"%s\" stroke=\"%s\" stroke-width=\"%s\" />\n", 
     x, y, r, cfill, cstrk, sw);
 }
@@ -37,7 +36,7 @@ void desenhaQuadraSombra(FILE *saida, double x, double y, double w, double h, ch
 
 void desenhaHidrante(FILE *saida, double x, double y, char *cfill, char *cstrk, char *sw){
     double r;
-    r = 6;
+    r = 4;
     fprintf(saida, "<circle cx=\"%lf\" cy=\"%lf\" r=\"%lf\" fill=\"%s\" stroke=\"%s\" stroke-width=\"%s\" />\n", 
     x, y, r, cfill, cstrk, sw);
 }

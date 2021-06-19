@@ -18,7 +18,6 @@ typedef struct casoscovid{
     double yT;
 }casosCovid;
 
-
 listacasos criaCaso(int n_casos, double x, double y, double w, double h, char *cep, int num, char face, double xT, double yT){
     casosCovid *c =(casosCovid*)malloc(sizeof(casosCovid));
     c->n_casos = n_casos;

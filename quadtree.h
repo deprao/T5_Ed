@@ -61,4 +61,6 @@ QuadTreeElemento getQuadTreeElemento(QuadTreeNo no);
 /*retorna a a raiz da quadtree a partir da lsita passada como parametro*/
 QuadTreeNo getRaizQuadTree(QuadTreeNo no);
 
+QuadTreeNo getNoQtId(QuadTreeNo raiz, char *id, char op);
+
 #endif

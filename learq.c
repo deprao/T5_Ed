@@ -391,7 +391,7 @@ void openQry(listaCidade listacidade, char *entradaQry, char *saidaQry, QuadTree
                 fscanf(entrada, "%s %s %s %s", sufixo, registrador, registrador2, cmc);
             }
         }
-        
+    getNoQtId(getQuadtreeObjetos(qt), "hnb08.4", 'h');
     fclose(saidaTxt);
     fclose(entrada);
     svgen(listacidade, saidaSvgQry);
