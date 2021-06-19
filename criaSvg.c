@@ -9,6 +9,7 @@
 #include "listaQuadras.h"
 #include "listaPostos.h"
 #include "listaCasosCovid.h"
+#include "registradores.h"
 
 void desenhaSemaforo(FILE *saida, double x, double y, char *cfill, char *cstrk, char *sw){
     double r;
@@ -96,7 +97,10 @@ void desenhaCasoCovid(FILE *saida, double xQ, double yQ, double wQ, double hQ, i
 }
 
 void desenhaRegistrador(FILE *saida, double x, double y, char*registrador){
-
+    fprintf(saida, "<line x1=\"%lf\" y1=\"%lf\" x2=\"%lf\" y2=\"%lf\" stroke=\"%s\"/>\n",
+    x, y, x, 0.0, "black");
+    fprintf(saida, "<text x=\"%lf\" y=\"%lf\" stroke=\"%s\" fill=\"%s\">%s</text>\n",
+    x, y, "black", "black", registrador);
 }
 
 void svgen(listaCidade listacidade,char *out){
@@ -234,6 +238,38 @@ void svgen(listaCidade listacidade,char *out){
         desenhaCasoCovid(svg, getXCasosCovid(c), getYCasosCovid(c), getWCasosCovid(c), getHCasosCovid(c), getNCasosCovid(c), getxTCasosCovid(c), getyTCasosCovid(c));
         C = getNext(C);
     }
+
+    if(reg1[0] != 0 || reg1[1] != 0){
+        desenhaRegistrador(svg, reg1[0], reg1[1], "R1");
+    }
+    if(reg2[0] != 0 || reg2[1] != 0){
+        desenhaRegistrador(svg, reg2[0], reg2[1], "R2");
+    }
+    if(reg3[0] != 0 || reg3[1] != 0){
+        desenhaRegistrador(svg, reg3[0], reg3[1], "R3");
+    } 
+    if(reg4[0] != 0 || reg4[1] != 0){
+        desenhaRegistrador(svg, reg4[0], reg4[1], "R4");
+    }
+    if(reg5[0] != 0 || reg5[1] != 0){
+        desenhaRegistrador(svg, reg5[0], reg5[1], "R5");
+    }
+    if(reg6[0] != 0 || reg6[1] != 0){
+        desenhaRegistrador(svg, reg6[0], reg6[1], "R6");
+    }
+    if(reg7[0] != 0 || reg7[1] != 0){
+        desenhaRegistrador(svg, reg7[0], reg7[1], "R7");
+    }
+    if(reg8[0] != 0 || reg8[1] != 0){
+        desenhaRegistrador(svg, reg8[0], reg8[1], "R8");
+    }
+    if(reg9[0] != 0 || reg9[1] != 0){
+        desenhaRegistrador(svg, reg9[0], reg9[1], "R9");
+    }
+    if(reg10[0] != 0 || reg10[1] != 0){
+        desenhaRegistrador(svg, reg10[0], reg10[1], "R10");
+    }
+
     fprintf(svg,"\n</svg>");
     fclose(svg);
 }

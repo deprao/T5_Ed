@@ -263,36 +263,36 @@ QuadTreeNo comparaIdQt(QuadTree qt, char c, char *id){
 QuadTreeNo getNoQtId_aux(NoStruct* node, char *id, char op, void* retorno){
 
     if( op == 'q' ){
-        printf("\n%s", getCepQuadra(node->elemento));
+        //printf("\n%s", getCepQuadra(node->elemento));
         if(strcmp(id, getCepQuadra(node->elemento)) == 0){
-            printf("Achou");
+            //printf("Achou Quadra");
             retorno = node->elemento;
             return retorno;
         }
     }
-    else if (op == 'h'){
-        printf("\n%s", getIdObjetos(node->elemento));
+    else if (op == 'o'){
+        //printf("\n%s", getIdObjetos(node->elemento));
         if(strcmp(id, getIdObjetos(node->elemento)) == 0){
-            printf("Achou");
+            //printf("Achou Objeto");
             retorno = node->elemento;
             return retorno;
         }
     }
 
     if(getFilho(node, "SE") != NULL){
-        printf(" entrou se ");
+        //printf(" entrou se ");
         retorno = getNoQtId_aux(getFilho(node, "SE"), id, op, retorno);
     }
     if(getFilho(node, "SO") != NULL){
-        printf(" entrou so ");
+        //printf(" entrou so ");
         retorno = getNoQtId_aux(getFilho(node, "SO"), id, op, retorno);
     }
     if(getFilho(node, "NE") != NULL){
-        printf(" entrou ne ");
+        //printf(" entrou ne ");
         retorno = getNoQtId_aux(getFilho(node, "NE"), id, op, retorno);
     }
     if(getFilho(node, "NO") != NULL){
-        printf(" entrou no ");
+        //printf(" entrou no ");
         retorno = getNoQtId_aux(getFilho(node, "NO"), id, op, retorno);
     }
 
@@ -310,7 +310,7 @@ QuadTreeNo getNoQtId(QuadTreeNo raiz, char *id, char op){
 
     retorno = getNoQtId_aux(node->raiz, id, op, retorno);
 
-    printf("\n\n>>achei essa porra aqui %s", getIdObjetos(retorno));
+    //printf("\n\n>>achei essa porra aqui %s", getIdObjetos(retorno));
 
     return retorno;
 

@@ -130,36 +130,6 @@ void imprimeHashtable(hstable hash, char op){
     }
 }
 
-Node comparaCpfEndereco(hstable hashPessoa, hstable hashEndereco, char *cpf){
-    NodeHashtable *hashArray1 = (NodeHashtable*)hashPessoa;
-    NodeHashtable *hashArray2 = (NodeHashtable*)hashEndereco;
-    tipo elemento, elemento2;
-
-    if(hashArray1 == NULL){
-        return;
-    }
-    if(hashArray2 == NULL){
-        return;
-    }
-
-    int posHash = getKey(cpf);
-    void *no1 = hashArray1[posHash].nodeHstable;
-    void *no2 = hashArray2[posHash].nodeHstable;
-
-    if ((getFirst(no1) != NULL) && (getFirst(no2) != NULL)){
-        for(Node i = getFirst(no1); i != NULL; i = getNext(i)){
-            elemento = getElemento(i);/*Elemento de hashPessoas*/
-            for(Node j = getFirst(no2); j != NULL; j = getNext(j)){
-                elemento2 = getElemento(j);/*Elemento de hashEndereco*/
-                if(strcmp(getCpfPessoa(elemento), getCpfEndereco(elemento2)) == 0){
-                    return j;
-                }
-            }   
-        }
-    }
-    
-}
-
 Node buscaEndereco(hstable hashEndereco, char *cep, char face, int num){
     NodeHashtable *hashArray = (NodeHashtable*)hashEndereco;
     tipo elemento;
@@ -209,6 +179,30 @@ Node buscaEstabelecimento(hstable hashEstabelecimento, char *cep, char face, int
                         return i;
                     }
                 }
+            }
+        }
+    }
+    return NULL;
+}
+
+Node buscaEnderecoCpf(hstable hashEndereco, char *cpf){
+    NodeHashtable *hashArray = (NodeHashtable*)hashEndereco;
+    tipo elemento;
+
+    if(hashArray == NULL){
+        return;
+    }
+
+    //printf("\n--%s---", cpf);
+    int posHash = getKey(cpf);
+    void *no = hashArray[posHash].nodeHstable;
+
+     if (getFirst(no) != NULL){
+        for(Node i = getFirst(no); i != NULL; i = getNext(i)){
+            elemento = getElemento(i);
+            if (strcmp(getCpfEndereco(elemento), cpf) == 0){
+                //printf("%s- Achou", getCpfEndereco(elemento));
+                return i;
             }
         }
     }

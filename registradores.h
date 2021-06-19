@@ -1,6 +1,8 @@
 #ifndef REGISTRADORES_H_
 #define REGISTRADORES_H_
 
+    #include "hashtable.h"
+    
     hstable hashtableEstabelecimentos[4];
     /*
     hashtableEstabelecimentos[0] - Descricao de estabelecimentos - chave : CPF

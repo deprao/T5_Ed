@@ -29,6 +29,7 @@ void escolheRegistrador(char *registrador, double x, double y){
         reg1[1] = y;
     }
     else if(strcmp(registrador, "R2") == 0){
+
         reg2[0] = x;
         reg2[1] = y;
     }
@@ -37,10 +38,12 @@ void escolheRegistrador(char *registrador, double x, double y){
         reg3[1] = y;
     }
     else if(strcmp(registrador, "R4") == 0){
+        printf("entrou %lf %lf", x, y);                                  
         reg4[0] = x;
         reg4[1] = y;
-    }
+    }          
     else if(strcmp(registrador, "R5") == 0){
+        //printf("entrou %lf %lf", x, y);
         reg5[0] = x;
         reg5[1] = y;
     }
@@ -419,6 +422,7 @@ void openQry(listaCidade listacidade, char *entradaQry, char *saidaQry, QuadTree
 
             else if(strcmp(comando, "@m?") == 0){
                 fscanf(entrada, "%s %s", registrador, cpf);
+                registradorM(registrador, cpf);
         
             }
 
@@ -429,6 +433,7 @@ void openQry(listaCidade listacidade, char *entradaQry, char *saidaQry, QuadTree
 
             else if(strcmp(comando, "@g?") == 0){
                 fscanf(entrada, "%s %s", registrador, id);
+                registradorG(registrador, id, qt);
             }
 
             else if(strcmp(comando, "@xy?") == 0){
