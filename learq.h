@@ -6,6 +6,8 @@
 #include "quadtree.h"
 #include "hashtable.h"
 
+void escolheRegistrador(char *registrador, double x, double y);
+
 /*Abre o arquivo geo, insere os elementos na lista e gera o svg de .geo*/
 void openGeo(listaCidade listacidade, QuadTree qt, char *nomeGeo, char *saidaSvg);
 
@@ -14,10 +16,10 @@ void openQry(listaCidade listacidade, char *entradaQry, char *saidaQry, QuadTree
 
 /*Abre o arquivo ec, realiza as alteracoes necessarias e cria a hash table
 de estabelecimentos*/
-void openEc(char *arquivoEc, hstable listaEc[]);
+void openEc(char *arquivoEc, listaStruct listacidade);
 
 /*Abre o arquivo pm, realiza as alteracoes necessarias e cria a hash 
 table de pessoas e moradores*/
-void openPm(char *arquivoPm, hstable listaPm[], listaStruct listacidade);
+void openPm(char *arquivoPm, listaStruct listacidade);
 
 #endif

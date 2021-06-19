@@ -18,8 +18,26 @@ typedef struct endereco{
 
 listaEndereco criaEndereco(char *cpf, char *complemento, char face, int num, listaQuadra quadra){
     Endereco *e =(Endereco*)malloc(sizeof(Endereco));
-    e->x = getXQuadra(quadra);
-    e->y = getYQuadra(quadra);
+    float xe = getXQuadra(quadra);
+    float ye = getYQuadra(quadra);
+    float we = getWQuadra(quadra);
+    float he = getHQuadra(quadra);
+    if(face == 'N'){
+        e->x = xe + num; 
+        e->y = ye + he;
+    }
+    else if(face == 'S'){
+        e->x = xe + num;
+        e->y = ye;
+    }
+    else if(face == 'L'){
+        e->x = xe;
+        e->y = ye + num;
+    }
+    else if(face == 'O'){
+        e->x = we;
+        e->y = ye + num;
+    }
     strcpy(e->cpf, cpf);
     strcpy(e->cep, getCepQuadra(quadra));     
     strcpy(e->complemento, complemento);
@@ -52,6 +70,16 @@ char getFaceEndereco(listaEndereco lista){
 int getNumEndereco(listaEndereco lista){
     Endereco *e = (Endereco*)lista;
     return e->num;
+}
+
+double getXEndereco(listaEndereco lista){
+    Endereco *e = (Endereco*)lista;
+    return e->x;
+}
+
+double getYEndereco(listaEndereco lista){
+    Endereco *e = (Endereco*)lista;
+    return e->y;
 }
 
 void setCpfEndereco(listaEndereco lista, char *cpf){

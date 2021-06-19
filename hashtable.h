@@ -20,4 +20,9 @@ void liberaHashtable(hstable hash);
 
 void imprimeHashtable(hstable hash, char op);
 
+Node comparaCpfEndereco(hstable hashPessoa, hstable hashEndereco, char *cpf);
+
+Node buscaEndereco(hstable hashEndereco, char *cep, char face, int num);
+
+Node buscaEstabelecimento(hstable hashEstabelecimento, char *cep, char face, int num);
 #endif

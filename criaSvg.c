@@ -95,6 +95,10 @@ void desenhaCasoCovid(FILE *saida, double xQ, double yQ, double wQ, double hQ, i
     }
 }
 
+void desenhaRegistrador(FILE *saida, double x, double y, char*registrador){
+
+}
+
 void svgen(listaCidade listacidade,char *out){
     FILE *svg;
     Node listQ = getListaQuadras(listacidade);

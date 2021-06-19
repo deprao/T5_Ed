@@ -17,6 +17,10 @@ char getFaceEndereco(listaEndereco lista);
 
 int getNumEndereco(listaEndereco lista);
 
+double getXEndereco(listaEndereco lista);
+
+double getYEndereco(listaEndereco lista);
+
 void setCpfEndereco(listaEndereco lista, char *cpf);
 
 void setCepEndereco(listaEndereco lista, char *cep);

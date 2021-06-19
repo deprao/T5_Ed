@@ -20,6 +20,66 @@
 #include "listaPessoas.h"
 #include "listaEndereco.h"
 #include "opgeo.h"
+#include "registradores.h"
+#include "opqry3.h"
+
+void escolheRegistrador(char *registrador, double x, double y){
+    if(strcmp(registrador, "R1") == 0){
+        reg1[0] = x;
+        reg1[1] = y;
+    }
+    else if(strcmp(registrador, "R2") == 0){
+        reg2[0] = x;
+        reg2[1] = y;
+    }
+    else if(strcmp(registrador, "R3") == 0){
+        reg3[0] = x;
+        reg3[1] = y;
+    }
+    else if(strcmp(registrador, "R4") == 0){
+        reg4[0] = x;
+        reg4[1] = y;
+    }
+    else if(strcmp(registrador, "R5") == 0){
+        reg5[0] = x;
+        reg5[1] = y;
+    }
+    else if(strcmp(registrador, "R6") == 0){
+        reg6[0] = x;
+        reg6[1] = y;
+    }
+    else if(strcmp(registrador, "R7") == 0){
+        reg7[0] = x;
+        reg7[1] = y;
+    }
+    else if(strcmp(registrador, "R8") == 0){
+        reg8[0] = x;
+        reg8[1] = y;
+    }
+    else if(strcmp(registrador, "R9") == 0){
+        reg9[0] = x;
+        reg9[1] = y;
+    }
+    else if(strcmp(registrador, "R10") == 0){
+        reg10[0] = x;
+        reg10[1] = y;
+    }
+}
+
+void iniciaRegistrador(){
+    for(int i = 0; i < 2; i++){
+        reg1[i] = 0;
+        reg2[i] = 0;
+        reg3[i] = 0;
+        reg4[i] = 0;
+        reg5[i] = 0;
+        reg6[i] = 0;
+        reg7[i] = 0;
+        reg8[i] = 0;
+        reg9[i] = 0;
+        reg10[i] = 0;
+    }
+}
 
 void openGeo(listaCidade listacidade, QuadTree qt, char *nomeGeo, char *saidaSvg){
     char comando[4];
@@ -219,6 +279,8 @@ void openQry(listaCidade listacidade, char *entradaQry, char *saidaQry, QuadTree
     entrada = fopen(entradaQry, "r");
     saidaTxt = fopen(saidaTxtQry, "w+");
 
+    iniciaRegistrador();
+
     if(entrada == NULL){
             printf("Erro ao abrir o arquivo entradaQry!!");
             system("pause");
@@ -357,10 +419,12 @@ void openQry(listaCidade listacidade, char *entradaQry, char *saidaQry, QuadTree
 
             else if(strcmp(comando, "@m?") == 0){
                 fscanf(entrada, "%s %s", registrador, cpf);
+        
             }
 
             else if(strcmp(comando, "@e?") == 0){
-                fscanf(entrada, "%s %s %c %d", registrador, cpf, &face, &num);
+                fscanf(entrada, "%s %s %c %d", registrador, cep, &face, &num);
+                registradorE(registrador, cep, face, num);
             }
 
             else if(strcmp(comando, "@g?") == 0){
@@ -369,6 +433,7 @@ void openQry(listaCidade listacidade, char *entradaQry, char *saidaQry, QuadTree
 
             else if(strcmp(comando, "@xy?") == 0){
                 fscanf(entrada, "%s %lf %lf", registrador, &x, &y);
+                escolheRegistrador(registrador, x, y);
             }
 
             else if(strcmp(comando, "ccv") == 0){  
@@ -391,7 +456,7 @@ void openQry(listaCidade listacidade, char *entradaQry, char *saidaQry, QuadTree
                 fscanf(entrada, "%s %s %s %s", sufixo, registrador, registrador2, cmc);
             }
         }
-    getNoQtId(getQuadtreeObjetos(qt), "hnb08.4", 'h');
+    //getNoQtId(getQuadtreeObjetos(qt), "hnb08.4", 'h');
     fclose(saidaTxt);
     fclose(entrada);
     svgen(listacidade, saidaSvgQry);
@@ -399,7 +464,7 @@ void openQry(listaCidade listacidade, char *entradaQry, char *saidaQry, QuadTree
     free(saidaTxtQry);
 }
 
-void openEc(char *arquivoEc, hstable hashEc[]){
+void openEc(char *arquivoEc, listaStruct listacidade){
     FILE *entrada;
     char comando[5];
     char codt[20];
@@ -424,13 +489,17 @@ void openEc(char *arquivoEc, hstable hashEc[]){
          if(strcmp(comando, "t") == 0){
             fscanf(entrada ,"%s %s", codt, descricao);
             elemento = criaDescricao(descricao, codt);
-            insereHashtable(hashEc[0], descricao, elemento);
+            insereHashtable(hashtableEstabelecimentos[0], descricao, elemento);
 
          }
          else if(strcmp(comando, "e") == 0){
             fscanf(entrada ,"%s %s %s %s %c %lf %s", cnpj, cpf, codt, cep, &face, &num, nome);
-            elemento = criaEstabelecimento(cnpj, cpf, codt, cep, face, num, nome);
-            insereHashtable(hashEc[1], cnpj, elemento);
+            Node quadra = comparaCepQuadra(listacidade, cep);
+             if(quadra == NULL){
+                 return;
+             }
+            elemento = criaEstabelecimento(cnpj, cpf, codt, cep, face, num, nome, quadra);
+            insereHashtable(hashtableEstabelecimentos[1], cep, elemento);
          }
     }
 
@@ -439,7 +508,7 @@ void openEc(char *arquivoEc, hstable hashEc[]){
     fclose(entrada);
 }
 
-void openPm(char *arquivoPm, hstable hashPm[], listaStruct listacidade){
+void openPm(char *arquivoPm, listaStruct listacidade){
     FILE *entrada;
     char comando[5];
     char cpf[20];
@@ -465,7 +534,7 @@ void openPm(char *arquivoPm, hstable hashPm[], listaStruct listacidade){
         if(strcmp(comando, "p") == 0){
             fscanf(entrada ,"%s %s %s %c %s", cpf, nome, sobrenome, &sexo, nasc);
             elemento = criaPessoa(cpf, nome, sobrenome, sexo, nasc);
-            insereHashtable(hashPm[0], cpf, elemento);
+            insereHashtable(hashtablePessoas[0], cpf, elemento);
         }
         else if(strcmp(comando, "m") == 0){
              fscanf(entrada ,"%s %s %c %lf %s", cpf, cep, &face, &num ,comp);
@@ -474,12 +543,13 @@ void openPm(char *arquivoPm, hstable hashPm[], listaStruct listacidade){
                  return;
              }
             elemento = criaEndereco(cpf, comp, face, num, quadra);
-            insereHashtable(hashPm[1], cpf, elemento);
+            insereHashtable(hashtablePessoas[1], cep, elemento);
+            insereHashtable(hashtablePessoas[2], cpf, elemento);
         }
     }
 
     //imprimeHashtable(hashPm[0], 'd');
-    //imprimeHashtable(hashPm[1], 'f');
+    //imprimeHashtable(hashtablePessoas[1], 'f');
 
     fclose(entrada);
 }

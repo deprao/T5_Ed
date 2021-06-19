@@ -4,6 +4,9 @@
 #include "hashtable.h"
 #include "lista.h"
 #include "quadtree.h"
+#include "listaPessoas.h"
+#include "listaEndereco.h"
+#include "listaEstabelecimentos.h"
 
 #define TAMANHO 1001
 
@@ -127,13 +130,87 @@ void imprimeHashtable(hstable hash, char op){
     }
 }
 
-Node comparaHashtableM(hstable hash, char *key, char op, QuadTree qt){
-    NodeHashtable *hashArray = (NodeHashtable*)hash;
+Node comparaCpfEndereco(hstable hashPessoa, hstable hashEndereco, char *cpf){
+    NodeHashtable *hashArray1 = (NodeHashtable*)hashPessoa;
+    NodeHashtable *hashArray2 = (NodeHashtable*)hashEndereco;
+    tipo elemento, elemento2;
+
+    if(hashArray1 == NULL){
+        return;
+    }
+    if(hashArray2 == NULL){
+        return;
+    }
+
+    int posHash = getKey(cpf);
+    void *no1 = hashArray1[posHash].nodeHstable;
+    void *no2 = hashArray2[posHash].nodeHstable;
+
+    if ((getFirst(no1) != NULL) && (getFirst(no2) != NULL)){
+        for(Node i = getFirst(no1); i != NULL; i = getNext(i)){
+            elemento = getElemento(i);/*Elemento de hashPessoas*/
+            for(Node j = getFirst(no2); j != NULL; j = getNext(j)){
+                elemento2 = getElemento(j);/*Elemento de hashEndereco*/
+                if(strcmp(getCpfPessoa(elemento), getCpfEndereco(elemento2)) == 0){
+                    return j;
+                }
+            }   
+        }
+    }
+    
+}
+
+Node buscaEndereco(hstable hashEndereco, char *cep, char face, int num){
+    NodeHashtable *hashArray = (NodeHashtable*)hashEndereco;
+    tipo elemento;
 
     if(hashArray == NULL){
         return;
     }
 
-    int posHash = getKey(key);
-    
+    //printf("\n--%s %c %d--", cep, face, num);
+    int posHash = getKey(cep);
+    void *no = hashArray[posHash].nodeHstable;
+
+     if (getFirst(no) != NULL){
+        for(Node i = getFirst(no); i != NULL; i = getNext(i)){
+            elemento = getElemento(i);
+            //printf("\n%s %c %d", getCepEndereco(elemento), getFaceEndereco(elemento), getNumEndereco(elemento));
+            if (strcmp(getCepEndereco(elemento), cep) == 0){
+                if(getFaceEndereco(elemento) == face){
+                    if(getNumEndereco(elemento) == num){
+                        //printf("%s %c %d", getCepEndereco(elemento), getFaceEndereco(elemento), getNumEndereco(elemento));
+                        return i;
+                    }
+                }
+            }
+        }
+    }
+    return NULL;
+}
+
+Node buscaEstabelecimento(hstable hashEstabelecimento, char *cep, char face, int num){
+    NodeHashtable *hashArray = (NodeHashtable*)hashEstabelecimento;
+    tipo elemento;
+
+    if(hashArray == NULL){
+        return;
+    }
+
+    int posHash = getKey(cep);
+    void *no = hashArray[posHash].nodeHstable;
+
+     if (getFirst(no) != NULL){
+        for(Node i = getFirst(no); i != NULL; i = getNext(i)){
+            elemento = getElemento(i);
+            if (strcmp(getCepEstabelecimento(elemento), cep) == 0){
+                if(getFaceEstabelecimento(elemento) == face){
+                    if(getNumEstabelecimento(elemento) == num){
+                        return i;
+                    }
+                }
+            }
+        }
+    }
+    return NULL;
 }

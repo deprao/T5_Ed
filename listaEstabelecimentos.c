@@ -12,6 +12,8 @@ typedef struct estabelecimento{
     char face;
     int num;
     char nome[40];
+    double x;
+    double y;
 }Estabelecimento;
 
 typedef struct descricaoestabelecimento{
@@ -19,8 +21,28 @@ typedef struct descricaoestabelecimento{
     char codt[15];
 }descricaoEstabelecimento;
 
-listaEstabelecimento criaEstabelecimento(char *cnpj, char *cpf, char *codt, char *cep, char face, int num, char *nome){
+listaEstabelecimento criaEstabelecimento(char *cnpj, char *cpf, char *codt, char *cep, char face, int num, char *nome, listaQuadra quadra){
     Estabelecimento *e = (Estabelecimento*)malloc(sizeof(Estabelecimento));
+    float xe = getXQuadra(quadra);
+    float ye = getYQuadra(quadra);
+    float we = getWQuadra(quadra);
+    float he = getHQuadra(quadra);
+    if(face == 'N'){
+        e->x = xe + num; 
+        e->y = ye + he;
+    }
+    else if(face == 'S'){
+        e->x = xe + num;
+        e->y = ye;
+    }
+    else if(face == 'L'){
+        e->x = xe;
+        e->y = ye + num;
+    }
+    else if(face == 'O'){
+        e->x = we;
+        e->y = ye + num;
+    }
     strcpy(e->cnpj, cnpj);
     strcpy(e->cpf, cpf);
     strcpy(e->codt, codt);
@@ -71,6 +93,16 @@ int getNumEstabelecimento(listaEstabelecimento lista){
 char *getNomeEstabelecimento(listaEstabelecimento lista){
     Estabelecimento *e = (Estabelecimento*)lista;
     return e->nome;
+}
+
+double getXEstabelecimento(listaEstabelecimento lista){
+    Estabelecimento *e = (Estabelecimento*)lista;
+    return e->x;
+}
+
+double getYEstabelecimento(listaEstabelecimento lista){
+    Estabelecimento *e = (Estabelecimento*)lista;
+    return e->y;
 }
 
 char *getCodtDescEstabelecimento(listaDescricaoEstabelecimento lista){

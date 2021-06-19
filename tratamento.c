@@ -10,6 +10,7 @@
 #include "listaQuadras.h"
 #include "listaCidadesQT.h"
 #include "hashtable.h"
+#include "registradores.h"
 
 char *retornaString(char *string){
      char *aux = strrchr(string,'/');
@@ -83,18 +84,16 @@ void tratamentoString(char *diretorio, char *arquivoGeo, char *arquivoQry, char 
 
                 openGeo(Cidade, CidadeQt, caminhoGeo, saidaSvg);
 
-                hstable hashtableEstabelecimentos[2];
-                hstable hashtablePessoas[2];
-
                 if(arquivoEc != NULL){
                     hashtableEstabelecimentos[0] = iniciaHashtable();
                     hashtableEstabelecimentos[1] = iniciaHashtable();
-                    openEc(arquivoEc, hashtableEstabelecimentos);
+                    openEc(arquivoEc, Cidade);
                 }
                 if(arquivoPm != NULL){
                     hashtablePessoas[0] = iniciaHashtable();
                     hashtablePessoas[1] = iniciaHashtable();
-                    openPm(arquivoPm, hashtablePessoas, Cidade);
+                    hashtablePessoas[2] = iniciaHashtable();
+                    openPm(arquivoPm, Cidade);
                 }
 
             if (arquivoQry != NULL){

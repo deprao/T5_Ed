@@ -1,11 +1,13 @@
 #ifndef LISTAESTABELECIMENTOS_H_
 #define LISTAESTABELECIMENTOS_H_
 
+#include "listaQuadras.h"
+
 typedef void *listaEstabelecimento;
 
 typedef void *listaDescricaoEstabelecimento;
 
-listaEstabelecimento criaEstabelecimento(char *cnpj, char *cpf, char *codt, char *cep, char face, int num, char *nome);
+listaEstabelecimento criaEstabelecimento(char *cnpj, char *cpf, char *codt, char *cep, char face, int num, char *nome, listaQuadra quadra);
 
 listaDescricaoEstabelecimento criaDescricao(char* descricao, char* codt);
 
@@ -22,6 +24,10 @@ char getFaceEstabelecimento(listaEstabelecimento lista);
 int getNumEstabelecimento(listaEstabelecimento lista);
 
 char *getNomeEstabelecimento(listaEstabelecimento lista);
+
+double getXEstabelecimento(listaEstabelecimento lista);
+
+double getYEstabelecimento(listaEstabelecimento lista);
 
 char *getCodtDescEstabelecimento(listaDescricaoEstabelecimento lista);
 
