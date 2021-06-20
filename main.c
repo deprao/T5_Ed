@@ -10,7 +10,7 @@ int main(int argc, char *argv[]){
     char *pastaSaida = NULL;
     char *arquivoPessoas = NULL;
     char *arquivoEstabelecimentos = NULL;
-
+    char *arquivoVia = NULL;
 
     for (int i = 0; i<argc; i++){ /* Função para captar os caracteres do terminal */
             if ( strcmp(argv[i], "-e") == 0){
@@ -72,12 +72,28 @@ int main(int argc, char *argv[]){
                 arquivoPessoas = (char*)malloc( ( ( strlen(argv[i]) )+1 )*sizeof(char) );
                 strcpy(arquivoPessoas, argv[i]);
             }
+             else if ( strcmp(argv[i], "-v") == 0){
+                    i++;
+                if(argv[i] == NULL){
+                    perror("\nSem parametros validos -pm");
+                    exit(1);
+                }
+                arquivoVia = (char*)malloc( ( ( strlen(argv[i]) )+1 )*sizeof(char) );
+                strcpy(arquivoVia, argv[i]);
+            }
+            else if ( strcmp(argv[i], "-k") == 0){
+                
+            }
+            else if ( strcmp(argv[i], "-u") == 0){
+                
+            }
         }
 
         /*printf("\n %s %s %s %s", diretorio, arquivoGeo, arquivoQry, pastaSaida);*/
 
-        tratamentoString(diretorio, arquivoGeo, arquivoQry, pastaSaida, arquivoEstabelecimentos, arquivoPessoas);
+        tratamentoString(diretorio, arquivoGeo, arquivoQry, pastaSaida, arquivoEstabelecimentos, arquivoPessoas, arquivoVia);
 
+        free(arquivoVia);
         free(arquivoEstabelecimentos);
         free(arquivoPessoas);
         free(pastaSaida);

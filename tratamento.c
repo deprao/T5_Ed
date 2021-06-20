@@ -20,15 +20,16 @@ char *retornaString(char *string){
 	return strtok(&aux[1],".");
 }
 
-void tratamentoString(char *diretorio, char *arquivoGeo, char *arquivoQry, char *pastaSaida, char *arquivoEc, char *arquivoPm){
+void tratamentoString(char *diretorio, char *arquivoGeo, char *arquivoQry, char *pastaSaida, char *arquivoEc, char *arquivoPm, char *arquivoVia){
     char *nomeArquivoGeo = NULL; /*nome do arquivo geo pós tratamento*/
     char *nomeArquivoQry = NULL; /*nome do arquivo qry pós tratamento*/
     char *caminhoGeo = NULL; /*caminho final do arquivo geo*/
     char *caminhoQry = NULL; /*caminho final do arquivo Qry*/
     char *saidaSvg = NULL; /*caminho de saída para o arquivo Svg*/
     char *saidaQry = NULL; /*caminho de saída para o arquivo Qry*/
-    char *caminhoEc = NULL;
-    char *caminhoPm = NULL;
+    char *caminhoEc = NULL; /*caminho final do arquivo Ec*/
+    char *caminhoPm = NULL; /*caminho final do arquivo Pm*/
+    char *caminhoVia = NULL; /*caminho final do arquivo Via*/
 
     listaCidade Cidade = iniciaListaCidade();
     listaCidadeQT CidadeQt = iniciaListaQTCidade();
@@ -55,6 +56,10 @@ void tratamentoString(char *diretorio, char *arquivoGeo, char *arquivoQry, char 
                         caminhoPm = (char*)malloc( ( ( strlen(diretorio) + strlen(arquivoPm) )+8 )* sizeof(char) );
                         sprintf(caminhoPm, "%s/%s", diretorio, arquivoPm);
                     }
+                    if(arquivoVia != NULL){
+                        caminhoVia = (char*)malloc( ( ( strlen(diretorio) + strlen(arquivoVia) )+8 )* sizeof(char) );
+                        sprintf(caminhoVia, "%s/%s", diretorio, arquivoVia);
+                    }
             }
             else{/*Não foram passados argumentos para o diretório*/
                caminhoGeo =  (char*)malloc( ( (strlen(arquivoGeo) )+8 )* sizeof(char) );
@@ -69,9 +74,9 @@ void tratamentoString(char *diretorio, char *arquivoGeo, char *arquivoQry, char 
                         caminhoEc = (char*)malloc( ( ( strlen(arquivoEc) )+8 )* sizeof(char) );
                         strcpy(caminhoEc, arquivoEc);
                     }
-                    if(arquivoPm != NULL){
-                        caminhoPm = (char*)malloc( ( ( strlen(arquivoPm) )+8 )* sizeof(char) );
-                        strcpy(caminhoEc, arquivoPm);
+                    if(arquivoVia != NULL){
+                        caminhoVia = (char*)malloc( ( ( strlen(arquivoVia) )+8 )* sizeof(char) );
+                        strcpy(caminhoEc, arquivoVia);
                     }
             }
             
