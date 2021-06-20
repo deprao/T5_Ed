@@ -208,3 +208,49 @@ Node buscaEnderecoCpf(hstable hashEndereco, char *cpf){
     }
     return NULL;
 }
+
+Node buscaPessoaCpf(hstable hashPessoa, char *cpf){
+    NodeHashtable *hashArray = (NodeHashtable*)hashPessoa;
+    tipo elemento;
+
+    if(hashArray == NULL){
+        return;
+    }
+
+    //printf("\n--%s---", cpf);
+    int posHash = getKey(cpf);
+    void *no = hashArray[posHash].nodeHstable;
+
+     if (getFirst(no) != NULL){
+        for(Node i = getFirst(no); i != NULL; i = getNext(i)){
+            elemento = getElemento(i);
+            if (strcmp(getCpfPessoa(elemento), cpf) == 0){
+                //printf("%s- Achou", getCpfPessoa(elemento));
+                return i;
+            }
+        }
+    }
+    return NULL;
+}
+
+Node buscaEstabelecimentoCnpj(hstable hashEstabelecimento, char *cnpj){
+    NodeHashtable *hashArray = (NodeHashtable*)hashEstabelecimento;
+    tipo elemento;
+
+    if(hashArray == NULL){
+        return;
+    }
+
+    int posHash = getKey(cnpj);
+    void *no = hashArray[posHash].nodeHstable;
+
+     if (getFirst(no) != NULL){
+        for(Node i = getFirst(no); i != NULL; i = getNext(i)){
+            elemento = getElemento(i);
+            if (strcmp(getCnpjEstabelecimento(elemento), cnpj) == 0){
+                return i;
+            }
+        }
+    }
+    return NULL;
+}

@@ -75,17 +75,25 @@ int main(int argc, char *argv[]){
              else if ( strcmp(argv[i], "-v") == 0){
                     i++;
                 if(argv[i] == NULL){
-                    perror("\nSem parametros validos -pm");
+                    perror("\nSem parametros validos -v");
                     exit(1);
                 }
                 arquivoVia = (char*)malloc( ( ( strlen(argv[i]) )+1 )*sizeof(char) );
                 strcpy(arquivoVia, argv[i]);
             }
             else if ( strcmp(argv[i], "-k") == 0){
-                
+                 i++;
+                if(argv[i] == NULL){
+                    perror("\nSem parametros validos -k");
+                    exit(1);
+                }
             }
             else if ( strcmp(argv[i], "-u") == 0){
-                
+                 i++;
+                if(argv[i] == NULL){
+                    perror("\nSem parametros validos -u");
+                    exit(1);
+                }
             }
         }
 

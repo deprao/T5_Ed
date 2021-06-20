@@ -92,6 +92,7 @@ void tratamentoString(char *diretorio, char *arquivoGeo, char *arquivoQry, char 
                 if(arquivoEc != NULL){
                     hashtableEstabelecimentos[0] = iniciaHashtable();
                     hashtableEstabelecimentos[1] = iniciaHashtable();
+                    hashtableEstabelecimentos[2] = iniciaHashtable();
                     openEc(arquivoEc, Cidade);
                 }
                 if(arquivoPm != NULL){

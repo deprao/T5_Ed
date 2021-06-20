@@ -26,4 +26,8 @@ Node buscaEstabelecimento(hstable hashEstabelecimento, char *cep, char face, int
 
 Node buscaEnderecoCpf(hstable hashEndereco, char *cpf);
 
+Node buscaPessoaCpf(hstable hashPessoa, char *cpf);
+
+Node buscaEstabelecimentoCnpj(hstable hashEstabelecimento, char *cnpj);
+
 #endif

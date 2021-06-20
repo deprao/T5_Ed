@@ -10,6 +10,8 @@
 #include "listaPostos.h"
 #include "listaCasosCovid.h"
 #include "registradores.h"
+#include "listaEndereco.h"
+#include "listaPessoas.h"
 
 void desenhaSemaforo(FILE *saida, double x, double y, char *cfill, char *cstrk, char *sw){
     double r;
@@ -101,6 +103,13 @@ void desenhaRegistrador(FILE *saida, double x, double y, char*registrador){
     x, y, x, 0.0, "black");
     fprintf(saida, "<text x=\"%lf\" y=\"%lf\" stroke=\"%s\" fill=\"%s\">%s</text>\n",
     x, y, "black", "black", registrador);
+}
+
+void desenhaDm(FILE *saida, double x, double y, char *cpf, char *nome, char *cep, char *complemento, int num){
+    fprintf(saida, "<line x1=\"%lf\" y1=\"%lf\" x2=\"%lf\" y2=\"%lf\" stroke=\"%s\"/>\n",
+    x, y, x, 0.0, "black");
+    fprintf(saida, "<text x=\"%lf\" y=\"%lf\" stroke=\"%s\" fill=\"%s\">%s %s\n%s %s %d</text>\n",
+    x, y, "black", "black", cep, nome, cep, complemento, num);
 }
 
 void svgen(listaCidade listacidade,char *out){
@@ -268,6 +277,13 @@ void svgen(listaCidade listacidade,char *out){
     }
     if(reg10[0] != 0 || reg10[1] != 0){
         desenhaRegistrador(svg, reg10[0], reg10[1], "R10");
+    }
+
+    int i = 0;
+    while (vetorHashDm[i] != NULL){
+        desenhaDm(svg, getXEndereco(vetorHashDm2[i]), getYEndereco(vetorHashDm2[i]), getCpfPessoa(vetorHashDm[i]), getNomePessoa(vetorHashDm[i]), getCepEndereco(vetorHashDm2[i]), getComplementoEndereco(vetorHashDm2[i]), getNumEndereco(vetorHashDm2[i]));
+        i = i + 1;
+        //printf(" i = %d", i);
     }
 
     fprintf(svg,"\n</svg>");

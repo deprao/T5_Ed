@@ -22,6 +22,7 @@
 #include "opgeo.h"
 #include "registradores.h"
 #include "opqry3.h"
+#include "opHash.h"
 
 void escolheRegistrador(char *registrador, double x, double y){
     if(strcmp(registrador, "R1") == 0){
@@ -29,7 +30,6 @@ void escolheRegistrador(char *registrador, double x, double y){
         reg1[1] = y;
     }
     else if(strcmp(registrador, "R2") == 0){
-
         reg2[0] = x;
         reg2[1] = y;
     }
@@ -37,13 +37,11 @@ void escolheRegistrador(char *registrador, double x, double y){
         reg3[0] = x;
         reg3[1] = y;
     }
-    else if(strcmp(registrador, "R4") == 0){
-        printf("entrou %lf %lf", x, y);                                  
+    else if(strcmp(registrador, "R4") == 0){                             
         reg4[0] = x;
         reg4[1] = y;
     }          
     else if(strcmp(registrador, "R5") == 0){
-        //printf("entrou %lf %lf", x, y);
         reg5[0] = x;
         reg5[1] = y;
     }
@@ -272,6 +270,7 @@ void openQry(listaCidade listacidade, char *entradaQry, char *saidaQry, QuadTree
     char cmc[20];
     char cmr[20];
     int maxCovid;
+    int totalVetorDm = 0;
 
     char *saidaSvgQry = malloc(strlen(saidaQry)+5);
     char *saidaTxtQry = malloc(strlen(saidaQry)+5);
@@ -283,6 +282,7 @@ void openQry(listaCidade listacidade, char *entradaQry, char *saidaQry, QuadTree
     saidaTxt = fopen(saidaTxtQry, "w+");
 
     iniciaRegistrador();
+    iniciaVetorHash();
 
     if(entrada == NULL){
             printf("Erro ao abrir o arquivo entradaQry!!");
@@ -398,6 +398,7 @@ void openQry(listaCidade listacidade, char *entradaQry, char *saidaQry, QuadTree
 
             else if(strcmp(comando, "dm?") == 0){
                 fscanf(entrada, "%s", cpf);
+                imprimeMorador(cpf, saidaTxt, totalVetorDm);
             }
 
             else if(strcmp(comando, "de?") == 0){
@@ -505,6 +506,7 @@ void openEc(char *arquivoEc, listaStruct listacidade){
              }
             elemento = criaEstabelecimento(cnpj, cpf, codt, cep, face, num, nome, quadra);
             insereHashtable(hashtableEstabelecimentos[1], cep, elemento);
+            insereHashtable(hashtableEstabelecimentos[2], cnpj, elemento);
          }
     }
 
